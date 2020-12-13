@@ -1,0 +1,1 @@
+(global.webpackChunkwebpack_vue=global.webpackChunkwebpack_vue||[]).push([[128],{1120:(n,e,u)=>{"use strict";var c;u.r(e),u.d(e,{default:()=>t});const o=(0,(c=u(5393)).Wm)("h2",null,"this is b view",-1),l={components:{common:u(119).Z},render:function(n,e,u,l,t,a){const s=(0,c.up)("common");return(0,c.wg)(),(0,c.j4)("div",null,[(0,c.Wm)(s),o])}},t=l}}]);
