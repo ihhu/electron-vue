@@ -6,10 +6,11 @@
   "scripts": {
     "tsc": "tsc --watch",
     "dev": "node ./build/dev.js --env mode=development --progress",
+    "build": "node ./build/build.js --env mode=production --progress",
+    
     "dev:cli": "webpack serve --env mode=development --progress --config build/webpack.renderer.config.js",
     "prod": "webpack --env mode=production --progress --config build/webpack.renderer.config.js",
-    "prod:analyzer": "webpack --env mode=production --analyze --progress --config build/webpack.renderer.config.js",
-    "build": "npm run prod"
+    "prod:analyzer": "webpack --env mode=production --analyze --progress --config build/webpack.renderer.config.js"
   },
   "keywords": [],
   "author": "",

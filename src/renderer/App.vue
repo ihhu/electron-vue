@@ -31,7 +31,7 @@
     }
     export default defineComponent({
         data(){
-            let text:number=3143434
+            let text:number=314345435
             return {
                 text
             }

@@ -1,3 +1,6 @@
+// 设置Babel环境变量
+process.env.BABEL_ENV = "renderer";
+
 const webpack = require('webpack');
 const { merge }=require("webpack-merge");
 
@@ -71,8 +74,6 @@ function getEntrys(pages){
 const {entrys,HTMLPlugins} = getEntrys(pages);
 
 function baseConf(env,argv){   
-    // 设置Babel环境变量
-    process.env.BABEL_ENV = "renderer";
  
     const IS_DEV = env.mode !== 'production';
     console.log("IS_DEV:::",IS_DEV,env);
@@ -255,6 +256,7 @@ function baseConf(env,argv){
             new VueLoaderPlugin()
         ]
     }
+
     // wepback development config
     const devConf = {
         mode:"development",
@@ -330,6 +332,16 @@ function baseConf(env,argv){
             })
         ]
 
+    }
+
+    // 显示编译进度
+    if(argv.progress){
+        const isProfile = argv.progress === 'profile';
+        baseConf.plugins.push(
+            new webpack.ProgressPlugin({
+                profile: isProfile
+            })
+        )
     }
 
     if(IS_DEV){

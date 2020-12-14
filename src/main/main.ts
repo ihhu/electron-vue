@@ -1,3 +1,20 @@
+import path from "path";
+import { pathToFileURL } from "url";
+
+
+
+
+console.log("electron main process running.")
+console.log("electron main process argvs",process.argv);
+
+const RENDERER_PATH = "./resources/app.asar/renderer/";
+let urlOrigin =  pathToFileURL(path.join(process.cwd(),RENDERER_PATH)).toString();
+
+if(IS_DEV){
+    urlOrigin = `${DEV_SERVER.protocol}://${DEV_SERVER.host}:${DEV_SERVER.port}/`
+    console.log("electron main process devServer",urlOrigin,new URL("./",urlOrigin).toString())
+}
+
 import { app, BrowserWindow } from "electron"
 
 function createWindow () {
@@ -8,7 +25,7 @@ function createWindow () {
       nodeIntegration: true
     }
   })
-  win.loadURL('http://localhost:8080')
+  win.loadURL(new URL("./",urlOrigin).toString())
 }
 
 app.whenReady().then(createWindow)

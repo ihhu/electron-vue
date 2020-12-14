@@ -1,3 +1,6 @@
+// 设置Babel环境变量
+process.env.BABEL_ENV = "main"; 
+
 const webpack = require('webpack');
 const { merge }=require("webpack-merge");
 
@@ -15,8 +18,6 @@ const {
 
 
 function baseConf(env,argv){   
-    // 设置Babel环境变量
-    process.env.BABEL_ENV = "main"; 
     
     const IS_DEV = env.mode !== 'production';
 
@@ -80,7 +81,8 @@ function baseConf(env,argv){
         devtool:false,
         watchOptions: {
             ignored: "node_modules/**"
-        }
+        },
+        plugins:[]
     }
 
     // wepback production config
@@ -93,20 +95,40 @@ function baseConf(env,argv){
                     extractComments:false,
                     terserOptions:{
                         compress:{
-                            drop_console:true,
                             hoist_vars:true,
                             reduce_vars:true,
                             hoist_funs:true,
                             dead_code:true
-                        },
-                        output:{
-                            ascii_only:true,
                         }
                     }
                 })
             ]
-        }
+        },
+        plugins:[]
 
+    }
+
+    // 显示编译进度
+    if(argv.progress){
+        const isProfile = argv.progress === 'profile';
+        baseConf.plugins.push(
+            new webpack.ProgressPlugin({
+                profile: isProfile
+            })
+        )
+    }
+    if(argv.devServer){
+        devConf.plugins.push(
+            new webpack.DefinePlugin({
+                DEV_SERVER:JSON.stringify(argv.devServer)
+            })
+        )
+    }else{
+        prodConf.plugins.push(
+            new webpack.DefinePlugin({
+                DEV_SERVER:false
+            })
+        )
     }
 
     if(IS_DEV){
