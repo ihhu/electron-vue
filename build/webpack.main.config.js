@@ -117,7 +117,7 @@ function baseConf(env,argv){
             })
         )
     }
-    if(argv.devServer){
+    if(IS_DEV&&argv.devServer){
         devConf.plugins.push(
             new webpack.DefinePlugin({
                 DEV_SERVER:JSON.stringify(argv.devServer)
