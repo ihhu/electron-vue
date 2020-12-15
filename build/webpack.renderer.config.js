@@ -73,7 +73,7 @@ function getEntrys(pages){
 
 const {entrys,HTMLPlugins} = getEntrys(pages);
 
-function baseConf(env,argv){   
+function webpackConfig(env,argv){   
  
     const IS_DEV = env.mode !== 'production';
     console.log("IS_DEV:::",IS_DEV,env);
@@ -351,4 +351,4 @@ function baseConf(env,argv){
     }
 }
 
-module.exports=baseConf;
+module.exports = webpackConfig;

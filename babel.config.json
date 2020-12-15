@@ -16,11 +16,8 @@
         "renderer":{
             "presets":[
                 ["@babel/preset-env",{
-                    "modules": false,
-                    "targets":{
-                        "node":true
-                    }
-                }],
+                    "modules": false
+                }],                
                 ["@babel/preset-typescript",{
                     "isTSX":true,
                     "allExtensions":true

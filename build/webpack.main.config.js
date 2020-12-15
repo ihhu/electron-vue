@@ -17,7 +17,7 @@ const {
 
 
 
-function baseConf(env,argv){   
+function webpackConfig(env,argv){   
     
     const IS_DEV = env.mode !== 'production';
 
@@ -138,4 +138,4 @@ function baseConf(env,argv){
     }
 }
 
-module.exports=baseConf;
+module.exports = webpackConfig;
