@@ -7,7 +7,9 @@
     "tsc": "tsc --watch",
     "dev": "node ./build/dev.js --env mode=development --progress",
     "build": "node ./build/build.js --env mode=production --progress",
-    
+    "package":"npm run build && electron-builder",
+    "postinstall": "electron-builder install-app-deps",
+    "rebuild": "electron-rebuild",
     "dev:cli": "webpack serve --env mode=development --progress --config build/webpack.renderer.config.js",
     "prod": "webpack --env mode=production --progress --config build/webpack.renderer.config.js",
     "prod:analyzer": "webpack --env mode=production --analyze --progress --config build/webpack.renderer.config.js"
@@ -15,6 +17,30 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "build": {
+    "asar": true,
+    "productName": "electron-vue",
+    "appId": "com.electron-vue.template",
+    "copyright":"Copyright © electron-vue-template",
+    "directories": {
+      "output": "dist/"
+    },
+    "files": [
+        "main/**",
+        "renderer/**"
+    ],
+    "win": {
+        "icon": "logo.ico",
+        "target": [
+          {
+            "target": "portable",
+            "arch": [
+              "ia32"
+            ]
+          }
+        ]
+      }
+  },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-transform-runtime": "^7.12.10",
@@ -32,6 +58,8 @@
     "cssnano": "^4.1.10",
     "dart-sass": "^1.25.0",
     "electron": "^11.1.0",
+    "electron-builder": "^22.9.1",
+    "electron-rebuild": "^2.3.4",
     "html-loader": "^1.3.2",
     "html-webpack-plugin": "^4.5.0",
     "less": "^3.13.0",

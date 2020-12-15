@@ -290,7 +290,7 @@ function webpackConfig(env,argv){
             path:paths.output,
             chunkFilename:`${paths.out_js}[name].[${hash}].js`,
             filename:`${paths.out_js}[name].[${hash}].js`,
-            publicPath:"/"
+            publicPath:"./"
         },
         optimization:{
             minimize: true,

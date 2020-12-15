@@ -25,7 +25,7 @@ function createWindow () {
       nodeIntegration: true
     }
   })
-  win.loadURL(new URL("./",urlOrigin).toString())
+  win.loadURL(new URL("./index.html",urlOrigin).toString())
 }
 
 app.whenReady().then(createWindow)

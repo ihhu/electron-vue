@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 
 import common from "@Components/common.vue";
 // import a from "@Views/a.vue";
@@ -8,7 +8,7 @@ const tsx = ()=>import(/* webpackChunkName:"tsx" */"@Views/tsx.tsx");
 // let c = 212;
 // c = "fda";
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes:[
         {
             path:"/",
