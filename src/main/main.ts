@@ -1,6 +1,6 @@
 import path from "path";
 import { pathToFileURL } from "url";
-
+import { app, BrowserWindow } from "electron"
 
 
 
@@ -14,8 +14,6 @@ if(IS_DEV){
     urlOrigin = `${DEV_SERVER.protocol}://${DEV_SERVER.host}:${DEV_SERVER.port}/`
     console.log("electron main process devServer",urlOrigin,new URL("./",urlOrigin).toString())
 }
-
-import { app, BrowserWindow } from "electron"
 
 function createWindow () {
   const win = new BrowserWindow({

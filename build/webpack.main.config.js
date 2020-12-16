@@ -72,7 +72,7 @@ function webpackConfig(env,argv){
                 IS_DEV
             }),
             new CleanWebpackPlugin({
-                cleanOnceBeforeBuildPatterns:["**/*"],
+                cleanOnceBeforeBuildPatterns:["**/*",`${paths.base}/dist/**`],
             })
         ]
     }
