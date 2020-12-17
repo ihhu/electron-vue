@@ -70,9 +70,6 @@ function webpackConfig(env,argv){
         plugins:[
             new webpack.DefinePlugin({
                 IS_DEV
-            }),
-            new CleanWebpackPlugin({
-                cleanOnceBeforeBuildPatterns:["**/*",`${paths.base}/dist/**`],
             })
         ]
     }
@@ -107,7 +104,20 @@ function webpackConfig(env,argv){
         plugins:[]
 
     }
-
+    // 
+    if(IS_DEV||!!argv.config){
+        baseConf.plugins.push(
+            new CleanWebpackPlugin({
+                cleanOnceBeforeBuildPatterns:["**/*"]
+            })
+        )
+    }else{
+        baseConf.plugins.push(
+            new CleanWebpackPlugin({
+                cleanOnceBeforeBuildPatterns:["**/*",`${paths.base}/dist/**`]
+            })
+        )
+    }
     // 显示编译进度
     if(argv.progress){
         const isProfile = argv.progress === 'profile';

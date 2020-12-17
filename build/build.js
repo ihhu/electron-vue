@@ -10,9 +10,6 @@ const { parseArgs } = require("./utils.js");
 
 const dev = {
     argv:{},
-    startElectron(){
-
-    },
     pack(type){
         const argv = this.argv;
         argv.devServer = false;
@@ -46,23 +43,44 @@ const dev = {
             })
         })
     },
-    // 编译主进程
-    startMain(){
-        return this.pack("main");
-    },
     // 编译渲染进程
-    startRenderer(){
+    buildRenderer(){
         return this.pack("renderer");
     },
+    // 编译主进程
+    buildMain(){
+        return this.pack("main");
+    },
+    // 打包
+    buildElectron(){
+        const electronBuilder = require('electron-builder');
+        return electronBuilder.build().then(() => {
+            console.log(`\n${chalk.white(`electron 打包完完`)}\n`);
+        })
+    },
     // 启动调试
-    async runDev(){
+    async buildStart(){
         try{
-            await this.startRenderer();
-            await this.startMain();
-            this.startElectron();
+            await this.buildRenderer();
+            await this.buildMain();
+            await this.buildElectron();
+            this.buildEnd();
         }catch(err){
             console.log(chalk.red(err));
             process.exit();
+        }
+    },
+    // 打包结束处理
+    buildEnd() {
+        // 打开文件管理器
+        const { spawn } = require('child_process');
+        const dirPath = path.join(process.cwd(),  'dist');
+        if (process.platform === 'darwin') {
+            spawn('open', [dirPath]);
+        } else if (process.platform === 'win32') {
+            spawn('explorer', [dirPath]);
+        } else if (process.platform === 'linux') {
+            spawn('nautilus', [dirPath]);
         }
     },
     run(){
@@ -70,8 +88,8 @@ const dev = {
         this.argv = {...this.argv,...argv};
         console.log(this.argv);
         // 启动调试
-        this.runDev();
-    },
+        this.buildStart();
+    }
 };
 
 dev.run();
