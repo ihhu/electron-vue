@@ -16,14 +16,19 @@ if(IS_DEV){
 }
 
 function createWindow () {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true
-    }
-  })
-  win.loadURL(new URL("./index.html",urlOrigin).toString())
+    const win = new BrowserWindow({
+        width:800,
+        height: 600,
+        minWidth :800,
+        minHeight : 600,
+        // frame : false,
+        webPreferences : {
+            nodeIntegration: true,
+            enableRemoteModule : true,
+            webSecurity :false
+        }
+    })
+    win.loadURL(new URL("./index.html",urlOrigin).toString())
 }
 
 app.whenReady().then(createWindow)
