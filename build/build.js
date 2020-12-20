@@ -55,7 +55,7 @@ const dev = {
     buildElectron(){
         const electronBuilder = require('electron-builder');
         return electronBuilder.build().then(() => {
-            console.log(`\n${chalk.white(`electron 打包完完`)}\n`);
+            console.log(`\n${chalk.white(`electron 打包完成`)}\n`);
         })
     },
     // 启动调试
