@@ -70,8 +70,6 @@ const dev = {
         })
         argv.devServer.protocol = this.devServerConfig["https"]?"https":"http";
 
-        // 设置Babel环境变量
-        process.env.BABEL_ENV = "main"; 
         const fnWebpackConfig = require('./webpack.main.config.js');
 
         let config = fnWebpackConfig(argv.env,argv);

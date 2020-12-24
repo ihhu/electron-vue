@@ -2,9 +2,6 @@ const path=require("path");
 const os = require('os');
 const portfinder = require("portfinder")
 
-const resolve = dir => path.join(__dirname, "..", dir);
-
-
 // 获取ip地址
 function getIPAdress() {
     let interfaces = os.networkInterfaces();
@@ -61,6 +58,8 @@ function parseArgs(argv){
     })
     return _data;
 }
+
+// 获取端口
 async function getPort(basePort= 8080){
     let port = basePort;
     portfinder.basePort = basePort;
@@ -69,7 +68,6 @@ async function getPort(basePort= 8080){
 }
 
 const untils={
-    resolve,
     getIPAdress,
     getPort,
     parseArgs
