@@ -73,6 +73,7 @@ const untils={
     parseArgs
 } 
 
+module.exports=untils;
 
 /* var path = require('path')
 var config = require('../config')
@@ -145,4 +146,3 @@ exports.styleLoaders = function (options) {
   }
   return output
 } */
-module.exports=untils;
