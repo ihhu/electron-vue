@@ -1,5 +1,5 @@
-process.env.NODE_ENV = 'development';
-const path = require('path')
+process.env.NODE_ENV = "production";
+const path = require("path")
 const { spawn } = require('child_process');
 
 const chalk = require("chalk");
@@ -73,7 +73,6 @@ const dev = {
     // 打包结束处理
     buildEnd() {
         // 打开文件管理器
-        const { spawn } = require('child_process');
         const dirPath = path.join(process.cwd(),  'dist');
         if (process.platform === 'darwin') {
             spawn('open', [dirPath]);
@@ -87,7 +86,6 @@ const dev = {
         let argv = parseArgs(process.argv);
         this.argv = {...this.argv,...argv};
         console.log(this.argv);
-        // 启动调试
         this.buildStart();
     }
 };

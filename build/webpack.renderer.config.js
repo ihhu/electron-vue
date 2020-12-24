@@ -221,7 +221,7 @@ function webpackConfig(env,argv){
                     test: /\.(eot|ttf|woff|woff2)\w*/,
                     type: 'asset/resource',
                     generator: {
-                        filename: `${paths.out_font}[name].[${hash}][ext]`
+                        filename: `${paths.out_font}[name]${hash}[ext]`
                     }
                 },
                 {
@@ -242,7 +242,7 @@ function webpackConfig(env,argv){
                             }else{
                                 _path= filename.replace(/^.*(\\|\/)/g,"").replace(/\..*$/g,"").replace(/\\/g,"/")
                             }
-                            return `${paths.out_images}${_path}.[${hash}][ext]`;
+                            return `${paths.out_images}${_path}${hash}[ext]`;
                         }
                     }
                 }
@@ -288,8 +288,8 @@ function webpackConfig(env,argv){
         mode:"production",
         output:{
             path:paths.output,
-            chunkFilename:`${paths.out_js}[name].[${hash}].js`,
-            filename:`${paths.out_js}[name].[${hash}].js`,
+            chunkFilename:`${paths.out_js}[name]${hash}.js`,
+            filename:`${paths.out_js}[name]${hash}.js`,
             publicPath:"./"
         },
         optimization:{
@@ -324,8 +324,8 @@ function webpackConfig(env,argv){
                 root:"./"
             }),
             new MiniCssExtractPlugin({
-                filename:`${paths.out_css}[name].[${hash}].css`,
-                chunkFilename:`${paths.out_css}[name].[${hash}].css`
+                filename:`${paths.out_css}[name]${hash}.css`,
+                chunkFilename:`${paths.out_css}[name]${hash}.css`
             }),
             new CleanWebpackPlugin({
                 cleanOnceBeforeBuildPatterns:["**/*",`!${paths.out_dll}*`],

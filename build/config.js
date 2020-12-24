@@ -87,7 +87,8 @@ const webConfig = {
         ],
         extensions: ['.ts', '.tsx', '.js', '.json',".vue"]
     },
-    hash:"contenthash:5",
+    hash:".[contenthash:5]",
+    // hash:"",
     commonCssLink:[],
     pages:{
         main:{
@@ -128,19 +129,13 @@ const rendererConfig = {
     },
     pages:{
         main:{
-            // page 的入口
             entry:`${RENDERER_PATHS.entry}main.tsx`,
-            // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
             title:"主页",
-            // 在 dist/index.html 的输出
             filename:"index.html",
-            // 模板来源
             template:`${RENDERER_PATHS.template}Index.ejs`
-            // 提取出来的通用 chunk 和 vendor chunk。
-            // chunks:[]
         }
     },
-    hash:"contenthash:5",
+    hash:".[contenthash:5]",
     commonCssLink:[]
 }
 // electron main config

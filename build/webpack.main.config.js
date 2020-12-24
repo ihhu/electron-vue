@@ -81,7 +81,6 @@ function webpackConfig(env,argv){
         },
         plugins:[]
     }
-
     // wepback production config
     const prodConf = {
         optimization:{
