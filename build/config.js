@@ -1,43 +1,44 @@
+const BASE_PATH = process.cwd();
 
-const BASE_PATH=process.cwd();
-// 资源路径
-const assetsPath = {
-    out_images:"Style/Images/",
-    out_font:"Style/Font/",
-    out_js:"JS/",
-    out_dll:"dll/",
-    out_css:"Style/Css/",
-    template:`${BASE_PATH}/public/pages/`,
-    "node_modules":`node_modules`
+// ======================================
+// ======================================
+// basePath
+const basePath = {
+    base: BASE_PATH,
+    out_images: "assets/images/",
+    out_font: "assets/font/",
+    out_js: "js/",
+    out_dll: "dll/",
+    out_css: "assets/css/",
+    public: `${BASE_PATH}/public/`,
+    "node_modules": `node_modules`
 }
-
-// web 资源路径
-const WEB_PATHS={
-    base:BASE_PATH,
-    entry:`${BASE_PATH}/src/`,
-    output:`${BASE_PATH}/dist/`,
-    ...assetsPath
+// web paths
+const webPaths = {
+    ...basePath,
+    entry: `${BASE_PATH}/src/`,
+    output: `${BASE_PATH}/dist/`,
+    page: `${BASE_PATH}/src/pages/`,
 }
-
-//  electron renderer 资源路径
-const RENDERER_PATHS={
-    base:BASE_PATH,
-    entry:`${BASE_PATH}/src/renderer/`,
-    output:`${BASE_PATH}/app/renderer/`,
-    ...assetsPath
+//  electron renderer paths 
+const rendererPaths = {
+    ...basePath,
+    entry: `${BASE_PATH}/src/renderer/`,
+    output: `${BASE_PATH}/app/renderer/`,
+    page: `${BASE_PATH}/src/renderer/pages/`,
 }
-
-// electron main 资源路径
-const MAIN_PATHS={
-    base:BASE_PATH,
+// electron main paths
+const mainPaths = {
+    ...basePath,
     entry:`${BASE_PATH}/src/main/`,
     output:`${BASE_PATH}/app/main/`,
-    ...assetsPath,
     out_js:""
 }
 
 
-// 开发环境配置
+// ======================================
+// ======================================
+// dev server config
 const devServer = {
     // 启动gzip压缩
     compress:true,
@@ -55,10 +56,13 @@ const devServer = {
     open:false
 }
 
+
+// ======================================
+// ======================================
 // web config
 const webConfig = {
-    target:"web",
-    paths:WEB_PATHS,
+    target: "web",
+    paths: webPaths,
     devServer:{
         ...devServer,
         // host:"0.0.0.0",
@@ -73,33 +77,23 @@ const webConfig = {
     },
     resolves:{
         alias:{
-            "@": WEB_PATHS.entry,
-            "@JS": "@/JS",
-            "@Style": "@/Style",
-            "@Store": "@/Store",
-            "@Views": "@/Views",
-            "@Components": "@/Components",
-            "@Router": "@/Router",
+            "@": webPaths.entry,
+            "@assets": "@/assets"
         },
         modules: [
-            WEB_PATHS.entry, 
-            WEB_PATHS.node_modules
+            webPaths.entry, 
+            webPaths.node_modules
         ],
         extensions: ['.ts', '.tsx', '.js', '.json',".vue"]
     },
     hash:".[contenthash:5]",
-    // hash:"",
     commonCssLink:[],
     pages:{
         main:{
-            // page 的入口
-            entry:`${WEB_PATHS.entry}main.tsx`,
-            // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
+            entry:`${webPaths.page}index/main.tsx`,
             title:"主页",
-            // 在 dist/index.html 的输出
             filename:"index.html",
-            // 模板来源
-            template:`${WEB_PATHS.template}Index.ejs`
+            template:`${webPaths.entry}Index.ejs`
             // 提取出来的通用 chunk 和 vendor chunk。
             // chunks:[]
         }
@@ -108,31 +102,26 @@ const webConfig = {
 // electron renderer config
 const rendererConfig = {
     target:"electron-renderer",
-    paths:RENDERER_PATHS,
+    paths:rendererPaths,
     devServer:{
         ...devServer,
     },
     resolves:{
         alias:{
-            "@": RENDERER_PATHS.entry,
-            "@JS": "@/JS",
-            "@Style": "@/Style",
-            "@Store": "@/Store",
-            "@Views": "@/Views",
-            "@Components": "@/Components",
-            "@Router": "@/Router",
+            "@": rendererPaths.entry,
+            "@assets": "@/assets"
         },
         modules: [
-            RENDERER_PATHS.entry,RENDERER_PATHS.node_modules
+            rendererPaths.entry,rendererPaths.node_modules
         ],
         extensions: ['.ts', '.tsx', '.js', '.json',".vue"]
     },
     pages:{
         main:{
-            entry:`${RENDERER_PATHS.entry}main.tsx`,
             title:"主页",
             filename:"index.html",
-            template:`${RENDERER_PATHS.template}Index.ejs`
+            entry:`${rendererPaths.page}/index/main.tsx`,
+            template:`${rendererPaths.entry}Index.ejs`
         }
     },
     hash:".[contenthash:5]",
@@ -141,32 +130,22 @@ const rendererConfig = {
 // electron main config
 const mainConfig = {
     target:"electron-main",
-    entry:`${MAIN_PATHS.entry}main.ts`,
-    paths:MAIN_PATHS,
+    entry:`${mainPaths.entry}main.ts`,
+    paths:mainPaths,
     resolves:{
         alias:{
-            "@": MAIN_PATHS.entry,
-            "@JS": "@/JS",
-            "@Style": "@/Style",
-            "@Store": "@/Store",
-            "@Views": "@/Views",
-            "@Components": "@/Components",
-            "@Router": "@/Router",
+            "@": mainPaths.entry,
         },
         modules: [
-            MAIN_PATHS.entry,MAIN_PATHS.node_modules
+            mainPaths.entry,mainPaths.node_modules
         ],
         extensions: ['.ts', '.tsx', '.js', '.json',".vue"]
     },
 }
 
-
-const config = {
+module.exports = {
     web: webConfig,
     renderer: rendererConfig,
     main: mainConfig,
     node: {}
 }
-
-
-module.exports = config
