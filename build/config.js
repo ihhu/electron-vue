@@ -124,7 +124,7 @@ const rendererConfig = {
             template:`${rendererPaths.entry}Index.ejs`
         }
     },
-    hash:".[contenthash:5]",
+    hash:"",
     commonCssLink:[]
 }
 // electron main config

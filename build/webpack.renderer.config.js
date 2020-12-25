@@ -237,8 +237,8 @@ function webpackConfig(env,argv){
                             // 处理图片路径，防止不同目录重名情况
                             let filename = pathData.filename;
                             let _path = filename;
-                            if(/^.*Images(\\|\/)/g.test(filename)){
-                                _path= filename.replace(/^.*Images(\\|\/)/g,"").replace(/\..*$/g,"").replace(/\\/g,"/")
+                            if(/^.*images(\\|\/)/g.test(filename)){
+                                _path= filename.replace(/^.*images(\\|\/)/g,"").replace(/\..*$/g,"").replace(/\\/g,"/")
                             }else{
                                 _path= filename.replace(/^.*(\\|\/)/g,"").replace(/\..*$/g,"").replace(/\\/g,"/")
                             }
