@@ -1,10 +1,10 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-import common from "@Components/common.vue";
+import Common from "@/components/Common.vue";
 // import a from "@Views/a.vue";
-const a = ()=>import(/* webpackChunkName:"a" */"@Views/a.vue");
-const b = ()=>import(/* webpackChunkName:"b" */"@Views/b.vue");
-const tsx = ()=>import(/* webpackChunkName:"tsx" */"@Views/tsx.tsx");
+const a = ()=>import(/* webpackChunkName:"a" */"@/components/A.vue");
+const b = ()=>import(/* webpackChunkName:"b" */"@/components/B.vue");
+const tsx = ()=>import(/* webpackChunkName:"tsx" */"@/components/Tsx.tsx");
 // let c = 212;
 // c = "fda";
 const router = createRouter({
@@ -12,7 +12,7 @@ const router = createRouter({
     routes:[
         {
             path:"/",
-            component:common,
+            component:Common,
         },
         {
             path:"/a",

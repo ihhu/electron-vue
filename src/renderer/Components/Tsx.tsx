@@ -1,5 +1,5 @@
 import { ref, defineComponent } from "vue";
-import common from "@/Components/common.vue"
+import common from "@/components/common.vue"
 
 
 export default defineComponent({
