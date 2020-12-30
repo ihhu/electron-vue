@@ -79,7 +79,8 @@ function webpackConfig(env,argv){
         watchOptions: {
             ignored: "node_modules/**"
         },
-        plugins:[]
+        plugins:[
+        ]
     }
     // wepback production config
     const prodConf = {
@@ -103,20 +104,8 @@ function webpackConfig(env,argv){
         plugins:[]
 
     }
-    // 
-    if(IS_DEV||!!argv.config){
-        baseConf.plugins.push(
-            new CleanWebpackPlugin({
-                cleanOnceBeforeBuildPatterns:["**/*"]
-            })
-        )
-    }else{
-        baseConf.plugins.push(
-            new CleanWebpackPlugin({
-                cleanOnceBeforeBuildPatterns:["**/*",`${paths.base}/dist/**`]
-            })
-        )
-    }
+    
+
     // 显示编译进度
     if(argv.progress){
         const isProfile = argv.progress === 'profile';
@@ -126,23 +115,54 @@ function webpackConfig(env,argv){
             })
         )
     }
-    if(IS_DEV&&argv.devServer){
-        devConf.plugins.push(
-            new webpack.DefinePlugin({
-                DEV_SERVER:JSON.stringify(argv.devServer)
-            })
-        )
-    }else{
-        prodConf.plugins.push(
-            new webpack.DefinePlugin({
-                DEV_SERVER:false
-            })
-        )
-    }
 
-    if(IS_DEV){
+    if(IS_DEV){        
+        baseConf.plugins.push(
+            new CleanWebpackPlugin({
+                cleanOnceBeforeBuildPatterns:["**/*"]
+            })
+        )
+        // 定义 开发相关信息
+        if(argv.devServer){
+            devConf.plugins.push(
+                new webpack.DefinePlugin({
+                    DEV_SERVER:JSON.stringify(argv.devServer)
+                })
+            )
+        }else{
+            prodConf.plugins.push(
+                new webpack.DefinePlugin({
+                    DEV_SERVER:false
+                })
+            )
+        }
+        
+        // 开启主进程hmr更新 定义socket地址
+        if(argv.hot){
+            devConf.plugins.push(
+                new webpack.HotModuleReplacementPlugin(),
+                new webpack.DefinePlugin({
+                    HMR_SOCKET_PATH:JSON.stringify(argv.socketPath)
+                })
+            )
+            baseConf.entry = [`${paths.base}/build/electron-main-hmr/index.js`,baseConf.entry]
+        }
+        
         return merge(baseConf, devConf);
     }else{
+        if(!!argv.config){       
+            baseConf.plugins.push(
+                new CleanWebpackPlugin({
+                    cleanOnceBeforeBuildPatterns:["**/*"]
+                })
+            )
+        }else{
+            baseConf.plugins.push(
+                new CleanWebpackPlugin({
+                    cleanOnceBeforeBuildPatterns:["**/*",`${paths.base}/dist/**`]
+                })
+            )
+        }
         return merge(baseConf, prodConf);
     }
 }

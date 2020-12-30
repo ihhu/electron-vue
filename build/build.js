@@ -66,7 +66,7 @@ const dev = {
             await this.buildElectron();
             this.buildEnd();
         }catch(err){
-            console.log(chalk.red(err));
+            console.log(chalk.red(err.stack||err.toString()));
             process.exit();
         }
     },

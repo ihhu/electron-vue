@@ -31,7 +31,7 @@ function createWindow () {
     win.loadURL(new URL("./index.html",urlOrigin).toString())
 }
 
-app.whenReady().then(createWindow)
+
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
@@ -44,3 +44,12 @@ app.on('activate', () => {
         createWindow()
     }
 })
+// app.whenReady().then(createWindow)
+app.on('ready', () => {
+    createWindow()
+})
+  
+// 启用热更新
+if((module as any).hot){
+    (module as any).hot.accept()
+}

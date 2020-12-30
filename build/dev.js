@@ -7,27 +7,16 @@ const webpack = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
 const electron = require('electron');
 
-const { parseArgs, getPort } = require("./utils.js");
+const HmrServer = require("./electron-main-hmr/HmrServer.js");
+
+const { logger, parseArgs, getPort } = require("./utils.js");
 
 
 const dev = {
     argv:{},
-    timer:null,
-    isRelaunch:false,
     electronProcess:null,
     devServerConfig:{},
-    // 美化Electron输出
-    electronLog(data, color) {
-        let log = '';
-        data.toString().split(/\r?\n/).forEach(line => log += `\n${line}`);
-        if (/[0-9A-z]+/.test(log)) {
-            console.log(
-                chalk[color].bold('┏ Electron -------------------') +
-                log +
-                chalk[color].bold('┗ ----------------------------')
-            )
-        }
-    },
+
     // 启动electron
     startElectron(){
         let args = ['--inspect=5858',path.join(process.cwd(), 'app/main/main.js')]
@@ -35,35 +24,40 @@ const dev = {
         const electronProcess = spawn(electron,args,options);
         //'--inspect=5858',
         electronProcess.stdout.on('data', data => {
-            this.electronLog(data, 'blue')
+            logger("Electron", data, chalk.blue)
         });
         electronProcess.stderr.on('data', data => {
-            this.electronLog(data, 'red')
+            logger("Electron", data, chalk.red)
         });
-        electronProcess.on('close', () => {
-            if (!this.isRelaunch) process.exit()
+        electronProcess.on('close', code => {
+            console.log("LLL:: ~ file: dev.js ~ line 34 ~ startElectron ~ code", code)
+            if (!code){
+                process.exit()
+            }else{
+                (code===100)&&this.relaunchElectron();
+            }
         });
         this.electronProcess = electronProcess;
 
     },
+    // 重启electron
     relaunchElectron(){
-        let electronProcess = this.electronProcess;                
+        let electronProcess = this.electronProcess;  
+        if(!electronProcess){return;}              
         // 重启electron
-        if(electronProcess && electronProcess.pid){
-            this.isRelaunch = true;
-            process.kill(electronProcess.pid)
-            this.electronProcess = null;
-            this.startElectron();
-            
-            clearTimeout(this.timer)
-            this.timer = setTimeout(()=>{
-                this.isRelaunch = false;
-            },5000)
+        if(electronProcess.pid){
+            try {
+                process.kill(electronProcess.pid)
+            } catch (error) {
+                
+            }
         }
+        this.electronProcess = null;
+        this.startElectron();
     },
     // 编译主进程
     startMain(){
-        const argv = this.argv;
+        const { argv } = this;
         argv.devServer = {};
         ["host","port"].forEach(key=>{
             argv.devServer[key] = this.devServerConfig[key]
@@ -77,6 +71,7 @@ const dev = {
         compiler.hooks.watchRun.tapAsync('watch-run', (compilation, done) => {
             // 设置Babel环境变量
             process.env.BABEL_ENV = "main";
+            this.invokeHmrServer("beforeCompile")
             done()
         })
         return new Promise((resolve, reject)=>{
@@ -100,10 +95,17 @@ const dev = {
                 }));
 
                 console.log(`${chalk.green(`\ntime：${(stats.endTime - stats.startTime) / 1000} s`)}\n${chalk.white('main 进程编译完毕')}\n`);
-
-                this.relaunchElectron();
                 
-                resolve(true);
+                this.invokeHmrServer("built",stats);
+                if(!argv.hot){
+                    this.relaunchElectron();
+                }
+                
+                if (resolve != null) {
+                    resolve(true)
+                    resolve = null
+                    return
+                }
             })
         })
     },
@@ -148,22 +150,41 @@ const dev = {
             })
         });
     },
+    async startHmrServer(){
+        const hmrServer = new HmrServer();
+        await hmrServer.listen();
+        hmrServer.ipc.on("error", error => {
+            logger("Main", error, chalk.red);
+        })
+        this.hmrServer = hmrServer;
+        this.argv.socketPath = hmrServer.socketPath;
+    },
+    invokeHmrServer(method,...datas){
+        const { argv } = this;
+        if(argv.hot&&this.hmrServer){
+            this.hmrServer[method](...datas)
+        }
+    },
     // 启动调试
     async runDev(){
+        const { argv } = this;
         try{
             await this.startRenderer();
+            if(argv.hot){
+                await this.startHmrServer();
+            }
             await this.startMain();
             this.startElectron();
         }catch(err){
-            console.log(chalk.red(err.toString()));
+            console.log(chalk.red(err.stack||err.toString()));
             process.exit();
         }
     },
+
     run(){
         let argv = parseArgs(process.argv);
         this.argv = {...this.argv,...argv};
-        console.log(this.argv);
-        // 启动调试
+
         this.runDev();
     },
 };
