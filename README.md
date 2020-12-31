@@ -1,30 +1,37 @@
 # electron-vue
+`Electron` 软件开发工程模版
 
-`Vue3 + Electron + webpack5 + typescript` 前端工程开发环境
+- 使用 `webpack5` + `electron-builder` 打包编译项目。
+- `main` 和 `renderer` 进程使用 `es6` + `vue3` 开发，可根据需求修改成 `react`
+- HMR更新 `main` 和 `renderer` 进程文件 
+- 支持使用 `typescript` 语言开发
+- `@babel/preset-env` 自动匹配转换 `main` 进程、 `renderer` 进程代码
 
 
-## 安装依赖
+
+## 快速开始
+`git clone` 或 下载模版，进入模版**执行命令** 
 ```javascript
+// 使用 yarn 命令请参照 yarn 文档修改
+
+// 安装依赖
 npm install
-```
 
-## `typescript`类型检测
-
-```javascript
+// `TypeScript`类型检测
 npm run tsc
-```
 
-## 运行 开发环境
+// 启动开发环境
+// 添加 --hot参数 可hmr更新主进程代码
+npm run dev 
 
-```javascript
-npm run dev
-```
-
-## 编译打包exe
-
-```javascript
+// 编译打包 win平台 exe
 npm run build
+
+// mac, linux平台打包需要在 package.json 文件添加相关配置
+// 详细配置文档见：https://www.electron.build/configuration/configuration
 ```
+
+
 
 ## 目录说明
 - `build` webpack config 配置目录
