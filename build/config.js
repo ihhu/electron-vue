@@ -78,6 +78,8 @@ const webConfig = {
     resolves:{
         alias:{
             "@": webPaths.entry,
+            "@main": `${mainPaths.entry}/main`,
+            "@renderer": `${mainPaths.entry}/renderer`,
             "@assets": "@/assets"
         },
         modules: [
@@ -109,6 +111,8 @@ const rendererConfig = {
     resolves:{
         alias:{
             "@": rendererPaths.entry,
+            "@main": `${mainPaths.entry}/main`,
+            "@renderer": `${mainPaths.entry}/renderer`,
             "@assets": "@/assets"
         },
         modules: [
@@ -135,6 +139,8 @@ const mainConfig = {
     resolves:{
         alias:{
             "@": mainPaths.entry,
+            "@main": `${mainPaths.entry}/main`,
+            "@renderer": `${mainPaths.entry}/renderer`,
         },
         modules: [
             mainPaths.entry,mainPaths.node_modules

@@ -11,7 +11,9 @@
         "moduleResolution": "node",
         "baseUrl": "./", 
         "paths": {
-            "@/*":["./src/renderer/*"],
+            "@/*":["./src/*"],
+            "@main*":["./src/main/*"],
+            "@renderer*":["./src/renderer/*"],
             "@assets/*": ["./src/renderer/assets/*"],
         }, 
         "allowSyntheticDefaultImports": true,
