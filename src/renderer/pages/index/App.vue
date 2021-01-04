@@ -24,7 +24,7 @@
 </template>
 <script lang="ts">
     import { defineComponent, reactive } from "vue";
-    import MyBook from "@/components/MyBook";
+    import MyBook from "@renderer/components/MyBook";
     interface Book {
         title: string
         year?: number

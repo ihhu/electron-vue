@@ -5,7 +5,7 @@
     </div>
 </template>
 <script>
-    import Common from "@/components/Common.vue"
+    import Common from "@renderer/components/Common.vue"
     export default{
         components:{
             Common

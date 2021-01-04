@@ -3,7 +3,7 @@
 </style>
 <script lang="tsx">
     import { defineComponent,ref } from "vue";
-    import Common from "@/components/Common.vue"
+    import Common from "@renderer/components/Common.vue"
     export default defineComponent({
         setup(){
             let compStr = ref("this is a view setup ");

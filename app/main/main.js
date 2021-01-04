@@ -356,7 +356,7 @@ module.exports = HmrClient;
   \******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const socketPath = "/tmp/electron-main-ipc-1f68.sock";
+const socketPath = "/tmp/electron-main-ipc-64.sock";
 
 if (!socketPath) {
   throw new Error(`[HMR] ELECTRON_HMR_SOCKET_PATH is not set`);
@@ -744,7 +744,7 @@ module.exports = require("util");;
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "e72f9ab759d56f768914"
+/******/ 		__webpack_require__.h = () => "8cdd2a98d876d5406eea"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */

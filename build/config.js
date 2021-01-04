@@ -77,9 +77,9 @@ const webConfig = {
     },
     resolves:{
         alias:{
-            "@": webPaths.entry,
-            "@main": `${mainPaths.entry}/main`,
-            "@renderer": `${mainPaths.entry}/renderer`,
+            "@": `${basePath.base}/src`,
+            "@main": "@/main",
+            "@renderer": "@/renderer",
             "@assets": "@/assets"
         },
         modules: [
@@ -110,10 +110,10 @@ const rendererConfig = {
     },
     resolves:{
         alias:{
-            "@": rendererPaths.entry,
-            "@main": `${mainPaths.entry}/main`,
-            "@renderer": `${mainPaths.entry}/renderer`,
-            "@assets": "@/assets"
+            "@": `${basePath.base}/src`,
+            "@main": "@/main",
+            "@renderer": "@/renderer",
+            "@assets": "@renderer/assets"
         },
         modules: [
             rendererPaths.entry,rendererPaths.node_modules
@@ -138,9 +138,9 @@ const mainConfig = {
     paths:mainPaths,
     resolves:{
         alias:{
-            "@": mainPaths.entry,
-            "@main": `${mainPaths.entry}/main`,
-            "@renderer": `${mainPaths.entry}/renderer`,
+            "@": `${basePath.base}/src`,
+            "@main": "@/main",
+            "@renderer": "@/renderer"
         },
         modules: [
             mainPaths.entry,mainPaths.node_modules
