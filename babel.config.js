@@ -1,4 +1,4 @@
-{
+module.exports ={
     "env":{
         "main":{
             "presets":[
@@ -11,7 +11,7 @@
                 ["@babel/preset-typescript",{
                     "allExtensions":true
                 }]
-            ]
+            ],
         },
         "renderer":{
             "presets":[
@@ -24,6 +24,7 @@
                 }]
             ],
             "plugins":[
+                "@babel/plugin-proposal-class-properties",
                 ["@vue/babel-plugin-jsx",{
                     "optimize":true
                 }],
@@ -37,8 +38,8 @@
             ]
         }
     },
-    "plugins":[
-        "@babel/plugin-proposal-class-properties"
-    ]
+    // "plugins":[
+    //     "@babel/plugin-proposal-class-properties"
+    // ]
 
 }

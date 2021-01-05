@@ -72,4 +72,4 @@ class HmrClient {
     }
 }
 
-module.exports = HmrClient;
+export default HmrClient;

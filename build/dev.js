@@ -30,7 +30,6 @@ const dev = {
             logger("Electron", data, chalk.red)
         });
         electronProcess.on('close', code => {
-            console.log("LLL:: ~ file: dev.js ~ line 34 ~ startElectron ~ code", code)
             if (!code){
                 process.exit()
             }else{

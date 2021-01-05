@@ -9,7 +9,7 @@
         "isolatedModules": true,
         "strict": true,
         "moduleResolution": "node",
-        "baseUrl": "./", 
+        "baseUrl": "./",
         "paths": {
             "@/*":["./src/*"],
             "@main/*":["./src/main/*"],

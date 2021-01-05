@@ -77,7 +77,7 @@ function webpackConfig(env,argv){
     const devConf = {
         devtool:false,
         watchOptions: {
-            ignored: "node_modules/**"
+            ignored: ["node_modules/**","build/**","dist/**","app/**","typings/**"]
         },
         plugins:[
         ]
