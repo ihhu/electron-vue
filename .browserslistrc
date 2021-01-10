@@ -1,2 +1,5 @@
-last 2 versions
-> 2%
+# electron 只需兼容chrome版本即可
+
+# last 2 versions
+# > 2%
+chrome > 85

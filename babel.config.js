@@ -5,7 +5,8 @@ module.exports ={
                 ["@babel/preset-env",{
                     "modules": false,
                     "targets":{
-                        "node":true
+                        "node":true,
+                        "electron":"11.1.1"
                     }
                 }],                
                 ["@babel/preset-typescript",{
@@ -24,7 +25,6 @@ module.exports ={
                 }]
             ],
             "plugins":[
-                "@babel/plugin-proposal-class-properties",
                 ["@vue/babel-plugin-jsx",{
                     "optimize":true
                 }],
@@ -38,8 +38,8 @@ module.exports ={
             ]
         }
     },
-    // "plugins":[
-    //     "@babel/plugin-proposal-class-properties"
-    // ]
+    "plugins":[
+        "@babel/plugin-proposal-class-properties"
+    ]
 
 }

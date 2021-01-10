@@ -95,7 +95,7 @@ const webConfig = {
             entry:`${webPaths.page}index/main.tsx`,
             title:"主页",
             filename:"index.html",
-            template:`${webPaths.entry}Index.ejs`
+            template:`${webPaths.entry}index.ejs`
             // 提取出来的通用 chunk 和 vendor chunk。
             // chunks:[]
         }
@@ -125,7 +125,7 @@ const rendererConfig = {
             title:"主页",
             filename:"index.html",
             entry:`${rendererPaths.page}/index/main.tsx`,
-            template:`${rendererPaths.entry}Index.ejs`
+            template:`${rendererPaths.entry}index.ejs`
         }
     },
     hash:"",
