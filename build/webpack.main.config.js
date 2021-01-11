@@ -23,7 +23,7 @@ function webpackConfig(env,argv){
 
     // webpack base config 
     const baseConf = {
-        mode: IS_DEV ? "development" : "production",
+        mode: IS_DEV ? "none" : "production",
         target,
         entry,
         output:{

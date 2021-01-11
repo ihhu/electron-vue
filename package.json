@@ -43,6 +43,7 @@
     },
     "nsis": {
       "oneClick": false,
+      "perMachine":true,
       "createDesktopShortcut": "always",
       "allowToChangeInstallationDirectory": true
     }
