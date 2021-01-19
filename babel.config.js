@@ -3,7 +3,7 @@ module.exports ={
         "main":{
             "presets":[
                 ["@babel/preset-env",{
-                    "modules": false,
+                    // "modules": false,
                     "targets":{
                         "node":true,
                         "electron":"11.1.1"
@@ -17,7 +17,7 @@ module.exports ={
         "renderer":{
             "presets":[
                 ["@babel/preset-env",{
-                    "modules": false
+                    // "modules": false
                 }],                
                 ["@babel/preset-typescript",{
                     "isTSX":true,
