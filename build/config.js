@@ -83,8 +83,7 @@ const webConfig = {
             "@assets": "@/assets"
         },
         modules: [
-            `${basePath.base}/src`,
-            webPaths.entry, 
+            basePath.base,
             webPaths.node_modules
         ],
         extensions: ['.ts', '.tsx', '.js', '.json',".vue"]
@@ -117,8 +116,7 @@ const rendererConfig = {
             "@assets": "@renderer/assets"
         },
         modules: [
-            `${basePath.base}/src`,
-            rendererPaths.entry,
+            basePath.base,
             rendererPaths.node_modules
         ],
         extensions: ['.ts', '.tsx', '.js', '.json',".vue"]
@@ -146,8 +144,7 @@ const mainConfig = {
             "@renderer": "@/renderer"
         },
         modules: [
-            `${basePath.base}/src`,
-            mainPaths.entry,
+            basePath.base,
             mainPaths.node_modules
         ],
         extensions: ['.ts', '.tsx', '.js', '.json',".vue"]
