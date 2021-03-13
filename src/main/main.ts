@@ -24,9 +24,9 @@ function createWindow () {
         // frame : false,
         webPreferences : {
             nodeIntegration: true,
-            enableRemoteModule : true,
-            webSecurity :false
-        }
+            webSecurity :false,
+            contextIsolation:false,
+        },
     })
     win.loadURL(new URL("./index.html",urlOrigin).toString())
 }
