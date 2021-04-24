@@ -41,10 +41,3 @@ npm run build
 - `dist` electron-builder 打包输出目录
 - `typings` .d.ts目录
 
-### 待优化实现
-- `.env` 文件读取
-- `preload` 文件打包配置
-- 自动更新逻辑
-- `app/package.json` 自动写入
-- ...
-

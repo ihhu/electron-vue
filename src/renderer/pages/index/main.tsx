@@ -1,7 +1,7 @@
 import "@assets/scss/style.scss";
 
 import { createApp, h } from "vue";
-import router from "@renderer/router/index.ts";
+import router from "@renderer/router/index";
 
 import App from "./App.vue";
 

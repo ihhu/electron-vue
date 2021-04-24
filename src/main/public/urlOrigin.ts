@@ -11,4 +11,4 @@ if(IS_DEV){
     urlOrigin = `${protocol}://${host}:${port}/`
 }
 
-export { urlOrigin };
+export default urlOrigin;
