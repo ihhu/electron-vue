@@ -5,3 +5,4 @@ declare const DEV_SERVER: {
     host:string,
     port:number
 };
+declare const global:Window;
