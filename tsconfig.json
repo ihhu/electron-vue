@@ -1,26 +1,41 @@
 {
-    "compilerOptions": {
-        "skipLibCheck":true,
-        "target": "esnext",
-        "module": "esnext",
-        "allowJs": true,
-        "jsx": "preserve",
-        "noEmit": true,
-        "isolatedModules": true,
-        "strict": true,
-        "moduleResolution": "node",
-        "baseUrl": "./",
-        "paths": {
-            "@/*":["./src/*"],
-            "@main/*":["./src/main/*"],
-            "@renderer/*":["./src/renderer/*"],
-            "@assets/*": ["./src/renderer/assets/*"],
-        }, 
-        "allowSyntheticDefaultImports": true,
-        "forceConsistentCasingInFileNames": true
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "target": "esnext",
+    "module": "esnext",
+    "allowJs": true,
+    "jsx": "preserve",
+    "noEmit": true,
+    "isolatedModules": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@main/*": [
+        "./src/main/*"
+      ],
+      "@renderer/*": [
+        "./src/renderer/*"
+      ],
+      "@assets/*": [
+        "./src/renderer/assets/*"
+      ],
     },
-    "include":[   
-        "src/**/*",
-        "typings",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": [
+      "esnext",
+      "dom"
     ]
+  },
+  "include": [
+    "src/**/*",
+    "typings",
+  ]
 }
