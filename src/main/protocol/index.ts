@@ -2,7 +2,7 @@
 import path from "path";
 import { app, protocol } from "electron";
 import { messageBox } from "@main/dialog/index";
-import urlOrigin from "@main/public/urlOrigin";
+import { RENDERER_PATH } from "@main/config/index";
 
 const PROTOCOL_URL = "electron";
 
@@ -10,16 +10,30 @@ const PROTOCOL_URL = "electron";
 const DEFAULT_PROTOCOL_REGEXP = new RegExp(`^${PROTOCOL_URL}://`);
 
 // 设置自定义协议
-function setDefaultProtocol() {
+function setDefaultProtocol(protocol?: string) {
+  let isSuccess = false;
+  if (!protocol) {
+    return [isSuccess, null];
+  }
+  if (app.isDefaultProtocolClient(protocol)) {
+    return [true, () => {
+      // 每次运行删除 这样就可以重新注册了
+      app.removeAsDefaultProtocolClient(protocol);
+    }]
+  }
   // 每次运行删除 这样就可以重新注册了
-  app.removeAsDefaultProtocolClient(PROTOCOL_URL);
+  app.removeAsDefaultProtocolClient(protocol);
   // 开发模式下在window运行需要做兼容
   if (process.env.NODE_ENV === "development" && process.platform === "win32") {
     // 设置electron.exe 和 app的路径
-    app.setAsDefaultProtocolClient(PROTOCOL_URL, process.execPath, [path.resolve(process.argv[1])]);
+    isSuccess = app.setAsDefaultProtocolClient(protocol, process.execPath, [path.resolve(process.argv[1])]);
   } else {
-    app.setAsDefaultProtocolClient(PROTOCOL_URL);
+    isSuccess = app.setAsDefaultProtocolClient(protocol);
   }
+  return [isSuccess, () => {
+    // 每次运行删除 这样就可以重新注册了
+    app.removeAsDefaultProtocolClient(protocol);
+  }]
 }
 
 // 监听mac下自定义协议打开
@@ -60,9 +74,8 @@ function registerSchemesAsPrivileged(scheme: string) {
 function registerFileProtocol(scheme: string) {
   protocol.registerFileProtocol(scheme, (request, callback) => {
     // 重新拼接文件资源路径
-    const resolvePath = urlOrigin;
-    let url = request.url.replace(`${scheme}://`, "");
-    url = path.join(resolvePath, url);
+    const resolvePath = RENDERER_PATH;
+    let url = path.join(resolvePath, request.url.replace(`${scheme}://`, ""));
     return callback({ path: decodeURIComponent(url) });
   });
 }

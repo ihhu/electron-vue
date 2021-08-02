@@ -1,7 +1,7 @@
-import path from "path";
+import path from 'path';
+import { RENDERER_PATH } from "@main/config/index";
 import { pathToFileURL } from "url";
 
-const RENDERER_PATH = "./resources/app.asar/renderer/";
 
 let urlOrigin = pathToFileURL(path.join(process.cwd(), RENDERER_PATH)).toString();
 

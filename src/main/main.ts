@@ -1,51 +1,45 @@
-import path from "path";
-import { pathToFileURL } from "url";
 import { app, BrowserWindow } from "electron";
 import protocol from "@/main/protocol";
+import { APP_CONFIG } from "@main/config/index";
+import { main as mainWindow } from "@main/browser-window/index";
 
 console.log("electron main process running.");
 console.log("electron main process argvs", process.argv);
 
-const RENDERER_PATH = "./resources/app.asar/renderer/";
-let urlOrigin = pathToFileURL(path.join(process.cwd(), RENDERER_PATH)).toString();
 
-if (IS_DEV) {
-  urlOrigin = `${DEV_SERVER.protocol}://${DEV_SERVER.host}:${DEV_SERVER.port}/`;
-  console.log("electron main process devServer", urlOrigin, new URL("./", urlOrigin).toString());
+class App {
+  config: typeof APP_CONFIG;
+  constructor(config = APP_CONFIG) {
+    this.config = config;
+  }
+  bindAppEvent() {
+    app.on("activate", () => {
+      if (BrowserWindow.getAllWindows().length === 0) {
+        mainWindow.create();
+      }
+    });
+    app.on("window-all-closed", () => {
+      if (process.platform !== "darwin") {
+        app.quit();
+      }
+    });
+  }
+  async registerProtocol() {
+    let config = this.config;
+    protocol.setDefaultProtocol(config.protocol);
+    protocol.registerSchemesAsPrivileged(config.scheme);
+    await app.whenReady();
+    protocol.registerFileProtocol(config.scheme);
+  }
+  async init() {
+    this.bindAppEvent();
+    this.registerProtocol();
+    await app.whenReady();
+    mainWindow.create();
+  }
 }
 
-function createWindow() {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    minWidth: 800,
-    minHeight: 600,
-    // frame : false,
-    webPreferences: {
-      nodeIntegration: true,
-      webSecurity: true,
-      contextIsolation: false,
-    },
-  });
-  win.loadURL(new URL("./index.html", urlOrigin).toString());
-}
-
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
-});
-
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
-});
-// app.whenReady().then(createWindow)
-app.on("ready", () => {
-  protocol.registerFileProtocol("electron");
-  createWindow();
-});
+new App().init();
 
 // 启用热更新
 if ((module as any).hot) {
