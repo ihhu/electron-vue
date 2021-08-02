@@ -3,10 +3,8 @@
 
 - 采用双 `package.json` 结构管理依赖
 - 使用 `webpack5` + `electron-builder` 打包编译项目。
-- `main` 和 `renderer` 进程使用 `es6` + `vue3` 开发，可根据需求修改成 `react`
 - 支持HMR更新 `main` 和 `renderer` 进程文件 
-- 支持使用 `typescript` 语言开发
-- `@babel/preset-env` 自动匹配转换 `main` 进程、 `renderer` 进程代码
+- 支持 `es6`,`typescript`,`scss`,`less` 语言开发
 
 
 
