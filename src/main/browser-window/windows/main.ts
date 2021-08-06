@@ -1,5 +1,5 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
-import { RENDERER_ORIGIN, defaultWindowOptions } from "@main/browser-window/config";
+import { RENDERER_ORIGIN, defaultWindowOptions } from "@/main/browser-window/config";
 console.log("LLL:: ~ file: main.ts ~ line 3 ~ RENDERER_ORIGIN", RENDERER_ORIGIN);
 
 let win: BrowserWindow | null = null;
