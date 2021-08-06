@@ -10,7 +10,7 @@ export const defaultWindowOptions: BrowserWindowConstructorOptions = {
   webPreferences: {
     webSecurity: false,
     enableRemoteModule: true,
-    devTools: IS_DEV,
+    devTools: true,
     nodeIntegration: true,
     contextIsolation: false,
   },

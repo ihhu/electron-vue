@@ -1,7 +1,5 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
 import { RENDERER_ORIGIN, defaultWindowOptions } from "@/main/browser-window/config";
-console.log("LLL:: ~ file: main.ts ~ line 3 ~ RENDERER_ORIGIN", RENDERER_ORIGIN);
-
 let win: BrowserWindow | null = null;
 
 const windowConfig = {
@@ -10,12 +8,11 @@ const windowConfig = {
 }
 
 function create(options: BrowserWindowConstructorOptions = windowConfig) {
-  let url = new URL("/index.html", RENDERER_ORIGIN).toString()
+  let url = new URL(`./index.html`, RENDERER_ORIGIN).toString()
   win = new BrowserWindow({
     ...defaultWindowOptions,
     ...options
   });
-
   win.loadURL(url);
   win.once("ready-to-show", () => {
     show();
