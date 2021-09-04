@@ -4,7 +4,7 @@ import { RENDERER_PATH } from "@main/config/index";
 
 // 默认窗口配置
 export const defaultWindowOptions: BrowserWindowConstructorOptions = {
-  titleBarStyle: "hidden",
+  // titleBarStyle: "hidden",
   // frame: false,
   show: false,
   webPreferences: {
@@ -13,6 +13,7 @@ export const defaultWindowOptions: BrowserWindowConstructorOptions = {
     devTools: true,
     nodeIntegration: true,
     contextIsolation: false,
+    nativeWindowOpen:true,
   },
   backgroundColor: "#ffffff",
   maximizable: false,

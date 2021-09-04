@@ -129,10 +129,9 @@ const dev = {
       done();
     });
 
-    WebpackDevServer.addDevServerEntrypoints(config, devServerConfig);
-    const port = devServerConfig.port;
-    const server = new WebpackDevServer(compiler, devServerConfig);
-    server.listen(port);
+    // WebpackDevServer.addDevServerEntrypoints(config, devServerConfig);
+    const server = new WebpackDevServer( devServerConfig,compiler);
+    server.start();
 
     return new Promise((resolve, reject) => {
       compiler.hooks.done.tap("done", stats => {
