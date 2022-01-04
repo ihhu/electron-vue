@@ -788,7 +788,7 @@ packages:
     version: 4.3.0
     engines: {node: '>=8'}
     dependencies:
-      color-convert: registry.nlark.com/color-convert/2.0.1
+      color-convert: registry.npmmirror.com/color-convert/2.0.1
     dev: true
 
   registry.nlark.com/anymatch/3.1.2:
@@ -1251,15 +1251,6 @@ packages:
       color-name: registry.nlark.com/color-name/1.1.3
     dev: true
 
-  registry.nlark.com/color-convert/2.0.1:
-    resolution: {integrity: sha1-ctOmjVmMm9s68q0ehPIdiWq9TeM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/color-convert/download/color-convert-2.0.1.tgz}
-    name: color-convert
-    version: 2.0.1
-    engines: {node: '>=7.0.0'}
-    dependencies:
-      color-name: registry.nlark.com/color-name/1.1.4
-    dev: true
-
   registry.nlark.com/color-name/1.1.3:
     resolution: {integrity: sha1-p9BVi9icQveV3UIyj3QIMcpTvCU=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/color-name/download/color-name-1.1.3.tgz}
     name: color-name
@@ -1436,15 +1427,6 @@ packages:
       path-type: registry.nlark.com/path-type/4.0.0
       yaml: registry.npmmirror.com/yaml/1.10.2
     dev: true
-
-  registry.nlark.com/crc/3.8.0:
-    resolution: {integrity: sha1-rWAmnCyFb4wpnixMwN5FVpFAVsY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/crc/download/crc-3.8.0.tgz}
-    name: crc
-    version: 3.8.0
-    dependencies:
-      buffer: registry.nlark.com/buffer/5.7.1
-    dev: true
-    optional: true
 
   registry.nlark.com/cross-spawn/7.0.3:
     resolution: {integrity: sha1-9zqFudXUHQRVUcF34ogtSshXKKY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/cross-spawn/download/cross-spawn-7.0.3.tgz}
@@ -6989,6 +6971,16 @@ packages:
       picocolors: registry.npmmirror.com/picocolors/1.0.0
     dev: true
 
+  registry.npmmirror.com/buffer/5.7.1:
+    resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/buffer/download/buffer-5.7.1.tgz}
+    name: buffer
+    version: 5.7.1
+    dependencies:
+      base64-js: registry.nlark.com/base64-js/1.5.1
+      ieee754: registry.npmmirror.com/ieee754/1.2.1
+    dev: true
+    optional: true
+
   registry.npmmirror.com/builder-util-runtime/8.9.1:
     resolution: {integrity: sha1-JfBms/vCCz5iNqm5VrHrsOM/9mo=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/builder-util-runtime/download/builder-util-runtime-8.9.1.tgz}
     name: builder-util-runtime
@@ -7137,6 +7129,15 @@ packages:
     dev: true
     optional: true
 
+  registry.npmmirror.com/color-convert/2.0.1:
+    resolution: {integrity: sha1-ctOmjVmMm9s68q0ehPIdiWq9TeM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/color-convert/download/color-convert-2.0.1.tgz}
+    name: color-convert
+    version: 2.0.1
+    engines: {node: '>=7.0.0'}
+    dependencies:
+      color-name: registry.nlark.com/color-name/1.1.4
+    dev: true
+
   registry.npmmirror.com/colord/2.9.1:
     resolution: {integrity: sha1-yWHqDv61fJ8PSDRFjybLnMSj+Q4=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/colord/download/colord-2.9.1.tgz}
     name: colord
@@ -7200,6 +7201,15 @@ packages:
     version: 3.19.2
     requiresBuild: true
     dev: true
+
+  registry.npmmirror.com/crc/3.8.0:
+    resolution: {integrity: sha1-rWAmnCyFb4wpnixMwN5FVpFAVsY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/crc/download/crc-3.8.0.tgz}
+    name: crc
+    version: 3.8.0
+    dependencies:
+      buffer: registry.npmmirror.com/buffer/5.7.1
+    dev: true
+    optional: true
 
   registry.npmmirror.com/crocket/1.0.15:
     resolution: {integrity: sha512-BRONr1gMEnmzow7qZmCAL3nlfEhSIJK39t4oqlNqn8f+D1NIrMuHdIilbpV3CNRHXIB1l6CJZBPaTTGBVMD3qw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/crocket/download/crocket-1.0.15.tgz}
@@ -7383,7 +7393,7 @@ packages:
       '@types/plist': registry.npmmirror.com/@types/plist/3.0.2
       '@types/verror': registry.npmmirror.com/@types/verror/1.10.5
       ajv: registry.npmmirror.com/ajv/6.12.6
-      crc: registry.nlark.com/crc/3.8.0
+      crc: registry.npmmirror.com/crc/3.8.0
       iconv-corefoundation: registry.npmmirror.com/iconv-corefoundation/1.1.7
       plist: registry.nlark.com/plist/3.0.4
       smart-buffer: registry.nlark.com/smart-buffer/4.2.0
@@ -7910,6 +7920,13 @@ packages:
     dependencies:
       safer-buffer: registry.nlark.com/safer-buffer/2.1.2
     dev: true
+
+  registry.npmmirror.com/ieee754/1.2.1:
+    resolution: {integrity: sha1-jrehCmP/8l0VpXsAFYbRd9Gw01I=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ieee754/download/ieee754-1.2.1.tgz}
+    name: ieee754
+    version: 1.2.1
+    dev: true
+    optional: true
 
   registry.npmmirror.com/ignore/5.1.9:
     resolution: {integrity: sha1-nsGly+jhRG7GDUQgBg1Dqm5zgvs=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ignore/download/ignore-5.1.9.tgz?cache=0&sync_timestamp=1635927263218&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fignore%2Fdownload%2Fignore-5.1.9.tgz}
