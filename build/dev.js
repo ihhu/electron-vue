@@ -2,7 +2,6 @@ process.env.NODE_ENV = "development";
 const path = require("path");
 const { spawn } = require("child_process");
 
-const chalk = require("chalk");
 const webpack = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
 const electron = require("electron");
@@ -11,13 +10,16 @@ const HmrServer = require("./electron-main-hmr/HmrServer.js");
 
 const { logger, parseArgs, getPort } = require("./utils.js");
 
+
+
 const dev = {
   argv: {},
   electronProcess: null,
   devServerConfig: {},
 
   // 启动electron
-  startElectron() {
+  async startElectron() {    
+    const {default:chalk}= await import("chalk");
     let args = ["--inspect=5858", path.join(process.cwd(), "app/main/main.js")];
     let options = {};
     const electronProcess = spawn(electron, args, options);
@@ -53,7 +55,8 @@ const dev = {
     this.startElectron();
   },
   // 编译主进程
-  startMain() {
+  async startMain() {
+    const {default:chalk}= await import("chalk");
     const { argv } = this;
     argv.devServer = {};
     ["host", "port"].forEach(key => {
@@ -112,6 +115,7 @@ const dev = {
   },
   // 编译渲染进程
   async startRenderer() {
+    const {default:chalk} = await import("chalk");
     const argv = this.argv;
     const fnWebpackConfig = require("./webpack.renderer.config.js");
 
@@ -150,6 +154,7 @@ const dev = {
     });
   },
   async startHmrServer() {
+    const {default:chalk} = await import("chalk");
     const hmrServer = new HmrServer();
     await hmrServer.listen();
     hmrServer.ipc.on("error", error => {
@@ -166,6 +171,7 @@ const dev = {
   },
   // 启动调试
   async runDev() {
+    const {default:chalk}= await import("chalk");
     const { argv } = this;
     try {
       await this.startRenderer();

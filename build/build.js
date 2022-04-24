@@ -2,14 +2,14 @@ process.env.NODE_ENV = "production";
 const path = require("path");
 const { spawn } = require("child_process");
 
-const chalk = require("chalk");
 const webpack = require("webpack");
 
 const { parseArgs } = require("./utils.js");
 
 const dev = {
   argv: {},
-  pack(type) {
+  async pack(type) {
+    const {default:chalk}= await import("chalk");
     const argv = this.argv;
     argv.devServer = false;
 
@@ -55,7 +55,8 @@ const dev = {
     return this.pack("main");
   },
   // 打包
-  buildElectron() {
+  async buildElectron() {
+    const {default:chalk}= await import("chalk");
     const electronBuilder = require("electron-builder");
     return electronBuilder.build().then(() => {
       console.log(`\n${chalk.white(`electron 打包完成`)}\n`);
@@ -63,6 +64,7 @@ const dev = {
   },
   // 启动调试
   async buildStart() {
+    const {default:chalk}= await import("chalk");
     try {
       await this.buildRenderer();
       await this.buildMain();
